@@ -1,0 +1,5 @@
+package UtilsWs;
+
+class GzipOps {
+
+}
