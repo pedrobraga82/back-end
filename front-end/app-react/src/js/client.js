@@ -3,7 +3,7 @@ import ReactDOM from "react-dom"
 import { Provider } from "react-redux"
 import { Router, Route, IndexRoute, hashHistory } from "react-router";
 
-import Main from "./components/Main.jsx"
+import Main from "./components/Main.js"
 
 
 

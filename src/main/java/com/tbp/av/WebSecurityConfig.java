@@ -55,6 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/api/authenticate").permitAll()
                     .antMatchers("/api/user").permitAll()
+                    .antMatchers("/api/caduser").permitAll()
+                    .antMatchers("/api/userslist").permitAll()
                     .antMatchers("/").permitAll()
                     .antMatchers("/favicon.ico").permitAll()
                     .anyRequest().authenticated()
@@ -65,6 +67,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .failureHandler(ajaxAuthenticationFailureHandler)
                     .usernameParameter("username")
                     .passwordParameter("password")
+                
+
                 .and()
                     .logout()
                     .logoutUrl("/api/logout")

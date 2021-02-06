@@ -9,11 +9,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class InitDatabase {
 
-
+	byte[] arquivo;
+	
     @Autowired
     public InitDatabase(UserService userService) {
-        userService.create("admin", "admin", "USER");
-        userService.create("tomcat", "tomcat", "USER");
+        userService.create("admin", "admin", "USER","","","","",arquivo);
+        userService.create("tomcat", "tomcat", "USER","","","","",arquivo);
     }
 
 

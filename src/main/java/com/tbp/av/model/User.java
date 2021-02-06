@@ -14,25 +14,115 @@ public class User {
     String username;
     @Column(nullable = false)
     String password;
-    @Column(nullable = false)
-    String salt;
-    @Column(nullable = false)
-    String role;
+	/*
+	 * @Column(nullable = false) String salt;
+	 * 
+	 * @Column(nullable = false) String role;
+	 */
+    @Column
+    String empresa;
+    @Column
+    String endereco;
+    @Column
+    String cnpj;
+    @Column
+    String ie;
     @Column
     String token;
+    @Column
+    String salt;
+    @Column 
+    String role;
+    
+    @Column
+    private byte[] arquivo;
 
+    
+    
     public User() {
 
     }
 
-    public User(String username, String password, String salt, String role) {
+    public User(String username,String password, String salt, String role,  String cnpj, String ie,String endereco,String empresa, byte[] arquivo ) {
         this.username = username;
         this.password = password;
+        this.cnpj = cnpj;
+        this.ie = ie;
+        this.endereco = endereco;
+        this.empresa = empresa;
         this.salt = salt;
-        this.role = role;
-    }
+   		this.role = role;
+   		this.arquivo = arquivo;
 
-    public Integer getId() {
+    }
+    
+    
+    
+    
+    
+    
+
+    public byte[] getArquivo() {
+		return arquivo;
+	}
+
+	public void setArquivo(byte[] arquivo) {
+		this.arquivo = arquivo;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
+	public String getIe() {
+		return ie;
+	}
+
+	public void setIe(String ie) {
+		this.ie = ie;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Integer getId() {
         return id;
     }
 
