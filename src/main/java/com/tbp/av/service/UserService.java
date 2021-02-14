@@ -38,10 +38,39 @@ public class UserService {
 	    	
 	    	
 	    }
+	    
+	    public User UpdateUser(User user, Integer id) {
+	    	
+	    	
+	    	User usuario = userRepository.findOne(id);
+	    	
+	    	
+	    	if (usuario !=null) {
+		        String salt = stringSupport.generate();
 
-	    public void create(String username, String password, String role, String cnpj, String ie,String endereco,String empresa, byte[] arquivo  ) {
+    			usuario.setEmpresa(user.getEmpresa());
+    			usuario.setCnpj(user.getCnpj());
+    			usuario.setEndereco(user.getEndereco());
+    			usuario.setIe(user.getIe());
+    			usuario.setPassword(shaPasswordEncoder.encodePassword(user.getPassword(), salt));
+    			usuario.setCnpj(user.getCnpj());
+    			
+    			
+    			
+	    	}
+	    	else {
+	    		usuario = null;
+	    	}
+	    	
+	    	return userRepository.save(usuario);
+	    	
+	    	
+	    }
+	    	
+
+	    public void create(String username, String password, String role, String cnpj, String ie,String endereco,String empresa ) {
 	        String salt = stringSupport.generate();
-	        User u = userFactory.create(username, shaPasswordEncoder.encodePassword(password, salt), salt, role,  cnpj, ie,endereco, empresa, arquivo );
+	        User u = userFactory.create(username, shaPasswordEncoder.encodePassword(password, salt), salt, role,  cnpj, ie,endereco, empresa );
 	        userRepository.save(u);
 	    }
 
@@ -82,6 +111,10 @@ public class UserService {
 	        return null;
 	    }
 
+	    public User getById(Integer id) {
+	    	
+	    	return userRepository.findOne(id);
+	    }
 	
 	
 }

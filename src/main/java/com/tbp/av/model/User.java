@@ -3,6 +3,8 @@ package com.tbp.av.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class User {
@@ -34,6 +36,7 @@ public class User {
     @Column 
     String role;
     
+    @Lob
     @Column
     private byte[] arquivo;
 
@@ -43,7 +46,7 @@ public class User {
 
     }
 
-    public User(String username,String password, String salt, String role,  String cnpj, String ie,String endereco,String empresa, byte[] arquivo ) {
+    public User(String username,String password, String salt, String role,  String cnpj, String ie,String endereco,String empresa ) {
         this.username = username;
         this.password = password;
         this.cnpj = cnpj;
@@ -52,7 +55,7 @@ public class User {
         this.empresa = empresa;
         this.salt = salt;
    		this.role = role;
-   		this.arquivo = arquivo;
+   	//	this.arquivo = arquivo;
 
     }
     

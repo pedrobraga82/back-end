@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserFactory {
 
-    public User create(String username, String password, String salt, String role, String cnpj, String ie,String endereco,String empresa, byte[] arquivo) {
-        return new User( username, password, salt, role,   cnpj,  ie, endereco, empresa, arquivo);
+    public User create(String username, String password, String salt, String role, String cnpj, String ie,String endereco,String empresa) {
+        return new User( username, password, salt, role,   cnpj,  ie, endereco, empresa);
     }
 
 }
