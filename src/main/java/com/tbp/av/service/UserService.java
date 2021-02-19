@@ -39,6 +39,13 @@ public class UserService {
 	    	
 	    }
 	    
+	    
+	    public User getByCnpj(String cnpj) {
+	    	
+	    		return userRepository.findByCnpj(cnpj);
+	    	
+	    }
+	    
 	    public User UpdateUser(User user, Integer id) {
 	    	
 	    	
@@ -54,7 +61,7 @@ public class UserService {
     			usuario.setIe(user.getIe());
     			usuario.setPassword(shaPasswordEncoder.encodePassword(user.getPassword(), salt));
     			usuario.setCnpj(user.getCnpj());
-    			
+    			usuario.setSenhacertificado(user.getSenhacertificado());
     			
     			
 	    	}
@@ -68,9 +75,9 @@ public class UserService {
 	    }
 	    	
 
-	    public void create(String username, String password, String role, String cnpj, String ie,String endereco,String empresa ) {
+	    public void create(String username, String password, String role, String cnpj, String ie,String endereco,String empresa, String senhacertificado ) {
 	        String salt = stringSupport.generate();
-	        User u = userFactory.create(username, shaPasswordEncoder.encodePassword(password, salt), salt, role,  cnpj, ie,endereco, empresa );
+	        User u = userFactory.create(username, shaPasswordEncoder.encodePassword(password, salt), salt, role,  cnpj, ie,endereco, empresa, senhacertificado );
 	        userRepository.save(u);
 	    }
 

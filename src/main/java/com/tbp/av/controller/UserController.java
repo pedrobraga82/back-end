@@ -22,7 +22,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tbp.av.model.User;
+import com.tbp.av.service.StorageService;
 import com.tbp.av.service.UserService;
+import com.tbp.av.util.FileUploadUtil;
 
 import aj.org.objectweb.asm.TypeReference;
 
@@ -43,13 +45,13 @@ public class UserController {
     @Autowired
     UserService userService;
     
+    @Autowired
+    private StorageService storageService;
+    
     @GetMapping(value="userslist")
     public List<User> GetUsers() {
-    	
-    		return userService.getUsers();
-    	
+    		return userService.getUsers();	
     }
-    
     
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public HttpEntity<Map> user(HttpServletRequest request) {
@@ -72,18 +74,14 @@ public class UserController {
     
     @PostMapping(value = "/caduser")
    // public  void Salvar(@RequestParam("file") MultipartFile file) {  //,@RequestBody User user)  {
-    public  void Salvar(@RequestParam("file") MultipartFile file,@RequestBody User user) {  //,@RequestBody User user)  {
+    public  void Salvar(@RequestBody User user) {  //,@RequestBody User user)  {
         	
-    	
-    	//userService.UpdateUser(user, user.getId());
-
-    	
-		
+    
 		  try { 
 			  
 			  userService.create( user.getUsername(), user.getPassword(),
 		  user.getRole(), user.getCnpj(), user.getIe(), user.getEndereco(),
-		  user.getEmpresa()
+		  user.getEmpresa(), user.getSenhacertificado()
 		  
 		  ); } catch(Exception e) {
 		  
@@ -95,57 +93,40 @@ public class UserController {
     
     @PostMapping(value = "/caduser/file/{id}",  consumes = {"multipart/mixed", "multipart/form-data"})
     public  void SaveFile(@RequestParam("file") MultipartFile file,@RequestParam("id") Integer id)  {
-    	
-		
-		/*
-		 * User user = userService.getById(id);
-		 * 
-		 * try { user.setArquivo(file.getBytes()); } catch (IOException e) {
-		 * 
-		 * e.printStackTrace(); }
-		 * 
-		 * 
-		 * userService.UpdateUser(user, id);
-		 */
-		     	
-    	
-    	System.out.println(id);
-    	System.out.println("-------------");
-    	System.out.println(file.getOriginalFilename());
-    	
 
+		  User user = userService.getById(id);
+		  
+		  try { user.setArquivo(file.getBytes()); } catch (IOException e) {
+		  
+		  e.printStackTrace(); }
+		  
+		  userService.UpdateUser(user, id);
+		  
+		   String path = "src/main/resources/files/";
+
+		  String uploadDir = path + file.getOriginalFilename(); 
+
+
+		  try {
+			FileUploadUtil.saveFile(uploadDir, file.getOriginalFilename(), file);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		  
     	
    }
-    	
     	
     @GetMapping(value="/getuser/{id}")
     public User GetUser(@PathVariable Integer id) {
     	
-    	
     	return userService.getById(id);
     }
-
-    	
-    	
     	
     @PostMapping(value = "/update")
     public  User Update(@RequestBody User user, @PathVariable Integer id) {
     	
-    	
-    	
     	return userService.UpdateUser(user, id);
-    	
-    	
    }
-    	
-
-    	
-    
-    
-    
-    
-    
-    
-    
 
 }

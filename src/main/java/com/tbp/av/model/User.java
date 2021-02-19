@@ -16,6 +16,10 @@ public class User {
     String username;
     @Column(nullable = false)
     String password;
+    
+    @Column(nullable = true)
+    String senhacertificado;
+    
 	/*
 	 * @Column(nullable = false) String salt;
 	 * 
@@ -46,7 +50,7 @@ public class User {
 
     }
 
-    public User(String username,String password, String salt, String role,  String cnpj, String ie,String endereco,String empresa ) {
+    public User(String username,String password, String salt, String role,  String cnpj, String ie,String endereco,String empresa, String senhacertificado ) {
         this.username = username;
         this.password = password;
         this.cnpj = cnpj;
@@ -55,6 +59,7 @@ public class User {
         this.empresa = empresa;
         this.salt = salt;
    		this.role = role;
+   		this.senhacertificado = senhacertificado;
    	//	this.arquivo = arquivo;
 
     }
@@ -65,7 +70,15 @@ public class User {
     
     
 
-    public byte[] getArquivo() {
+    public String getSenhacertificado() {
+		return senhacertificado;
+	}
+
+	public void setSenhacertificado(String senhacertificado) {
+		this.senhacertificado = senhacertificado;
+	}
+
+	public byte[] getArquivo() {
 		return arquivo;
 	}
 

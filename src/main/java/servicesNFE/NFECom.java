@@ -121,14 +121,3 @@ public  class NFECom {
 	  }
 
 }
-
-
-
-
-
-
-
-
-
-
-
