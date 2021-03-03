@@ -104,6 +104,7 @@ public class UserService {
 	        String token = jwtService.createToken(username, secret, dateGenerator.getExpirationDate());
 	        User u = userRepository.findByUsername(username);
 	        u.setToken(token);
+	       
 	        return userRepository.save(u);
 	    }
 

@@ -28,7 +28,20 @@ public class AjaxAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         logger.debug("Authentication Successful");
         User u = userService.createUserToken(authentication.getName(), request.getRemoteAddr());
-        response.getWriter().print("{ \"token\" : \"" + u.getToken() + "\"}");
+		/*
+		 * response.getWriter().print("{ \"token\" : \"" + u.getToken() + "\"}");
+		 * response.getWriter().print("{ \"username\" : \"" + u.getUsername() + "\"}");
+		 * response.getWriter().print("{ \"role\" : \"" + u.getRole() + "\"}");
+		 */      
+        
+        response.getWriter().print("{token:" + u.getToken().toString() + ",");
+		response.getWriter().print("username:" + u.getUsername() + ",");
+		response.getWriter().print("role:" + u.getRole() + "}");
+		
+        
+        
+        
+        
         response.setStatus(HttpServletResponse.SC_OK);
         headerHandler.process(request, response);
     }

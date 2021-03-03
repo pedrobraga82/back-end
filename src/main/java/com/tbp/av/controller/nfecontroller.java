@@ -5,6 +5,8 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URL;
@@ -25,6 +27,13 @@ import org.json.XML;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tbp.av.model.Nfe;
+import com.tbp.av.model.NfeDTO;
+import com.tbp.av.model.User;
+import com.tbp.av.service.NfeService;
 import com.tbp.av.service.UserService;
 import com.tbp.av.util.GetFileCertificate;
 
@@ -46,11 +55,14 @@ public class nfecontroller {
 	@Autowired
 	UserService userService;
 
-
-	
+	@Autowired
+	NfeService nfeService;
+		
 	@CrossOrigin(allowedHeaders = "*",  origins = "*")
 	@GetMapping("/nfe/{cnpj}")
 	List<String> one(@PathVariable String cnpj) {
+		
+
 		
 	String pass = userService.getByCnpj(cnpj).getSenhacertificado();
 	String path_pk = "src/main/resources/files/"+ cnpj + ".pfx"; // +"/" + cnpj + ".pfx";
@@ -84,8 +96,47 @@ public class nfecontroller {
 
 	}
 	
-	
+    @PostMapping(value = "/cadnfe",consumes = "application/json", produces = "application/json")
+    public void SaveNfe(@RequestBody String nfe ) throws JsonProcessingException, IOException {
 
+    	final ObjectMapper objectMapper = new ObjectMapper();
+    	NfeDTO nfes = objectMapper.readValue(nfe, NfeDTO.class);
+
+		/*
+		 * ObjectMapper mapper = new ObjectMapper();
+		 * 
+		 * List<NfeDTO> nfes = mapper.reader() .forType(new
+		 * TypeReference<List<NfeDTO>>() {}) .readValue(nfe.toString());
+		 * 
+		 * System.out.println(nfes);
+		 */
+    	
+    	
+    	
+		  Nfe nf = new Nfe();
+		  
+		  nf.setChnfe(nfes.getChnfe()); 
+		  nf.setIe(nfes.getIe());
+		  nf.setNome(nfes.getNome()); 
+		  nf.setTiponf(nfes.getTiponf());
+		  nf.setValor(nfes.getValor());
+		  nf.setUser(userService.getByCnpj(nfes.getCnpj()));
+		  nf.setCnpjremetente(nfes.getCnpjremetente());
+		  
+		  nfeService.SalvarNfe(nf);
+		 
+    	
+    }
+    
+    
+    @GetMapping(value="nfelist")
+    public List<Nfe> getNfes() {
+    	
+    	return nfeService.GetNfes();
+    	
+    }
+    
+    
 }
 
 	

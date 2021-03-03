@@ -53,24 +53,20 @@ public class UserController {
     		return userService.getUsers();	
     }
     
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public HttpEntity<Map> user(HttpServletRequest request) {
-        Map<String,Object> result = new HashMap<String,Object>();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Map<String, Boolean> authorizations = new HashMap();
-        // TODO tem regras aqui que deveriam ir para o service
-        for (GrantedAuthority grantedAuthority : auth.getAuthorities()) {
-            authorizations.put(grantedAuthority.getAuthority(), Boolean.TRUE);
-        }
-        result.put(AUTHORIZATIONS, authorizations);
-        String username = (String) auth.getPrincipal();
-        result.put(USERNAME, username);
-        if("anonymousUser".equals(username)) {
-            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
-        }
-        return new HttpEntity(result);
-    }
-    
+	/*
+	 * @RequestMapping(value = "/user", method = RequestMethod.GET) public
+	 * HttpEntity<Map> user(HttpServletRequest request) { Map<String,Object> result
+	 * = new HashMap<String,Object>(); Authentication auth =
+	 * SecurityContextHolder.getContext().getAuthentication(); Map<String, Boolean>
+	 * authorizations = new HashMap(); // TODO tem regras aqui que deveriam ir para
+	 * o service for (GrantedAuthority grantedAuthority : auth.getAuthorities()) {
+	 * authorizations.put(grantedAuthority.getAuthority(), Boolean.TRUE); }
+	 * result.put(AUTHORIZATIONS, authorizations); String username = (String)
+	 * auth.getPrincipal(); result.put(USERNAME, username);
+	 * 
+	 * if("anonymousUser".equals(username)) { return new
+	 * ResponseEntity(HttpStatus.UNAUTHORIZED); } return new HttpEntity(result); }
+	 */    
     
     @PostMapping(value = "/caduser")
    // public  void Salvar(@RequestParam("file") MultipartFile file) {  //,@RequestBody User user)  {

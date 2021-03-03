@@ -1,6 +1,8 @@
 package com.tbp.av.model;
 
 
+import java.util.List;
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -44,6 +46,9 @@ public class User {
     @Column
     private byte[] arquivo;
 
+    @OneToMany(mappedBy="user")
+    private List<Nfe> nfe;
+    
     
     
     public User() {

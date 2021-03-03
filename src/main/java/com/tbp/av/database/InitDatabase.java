@@ -13,10 +13,13 @@ public class InitDatabase {
 	
     @Autowired
     public InitDatabase(UserService userService) {
-        userService.create("admin", "admin", "USER","31312312","24326252000173","","","1234");
-        userService.create("tomcat", "tomcat", "USER","432423423","879121225","","","1234");
-        userService.create("ftl", "admin", "USER","24326252000173","879121225","","","1234");
-        
+		/*
+		 * userService.create("admin", "admin",
+		 * "USER","31312312","24326252000173","","","1234");
+		 * userService.create("tomcat", "tomcat",
+		 * "USER","432423423","879121225","","","1234"); userService.create("ftl",
+		 * "admin", "USER","24326252000173","879121225","","","1234");
+		 */    
     }
 
 
