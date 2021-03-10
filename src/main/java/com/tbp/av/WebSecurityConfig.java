@@ -61,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/api/getuser/*").permitAll()
                     .antMatchers("/nfe/*").permitAll()
                     .antMatchers("/cadnfe").permitAll()
-                    .antMatchers("/nfelist").permitAll()
+                    .antMatchers("/nfelist/*/*/*").permitAll()
                      .antMatchers("/").permitAll()
                     .antMatchers("/favicon.ico").permitAll()
                     .anyRequest().authenticated()

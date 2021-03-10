@@ -1,5 +1,11 @@
 package com.tbp.av.model;
 
+import java.util.Date;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class NfeDTO {
 	
@@ -14,16 +20,18 @@ public class NfeDTO {
 	  String cnpjremetente;
 	  String cnpj;
 	  String datarecto;
-	  String dataemissao;
+	  
+	  @Temporal(TemporalType.DATE)
+	  Date dataemissao;
 
 	  
 	  
 	  
-	  public String getDataemissao() {
+	  public Date getDataemissao() {
 		return dataemissao;
 	}
 
-	public void setDataemissao(String dataemissao) {
+	public void setDataemissao(Date dataemissao) {
 		this.dataemissao = dataemissao;
 	}
 

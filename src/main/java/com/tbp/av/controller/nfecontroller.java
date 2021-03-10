@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URL;
@@ -15,6 +16,10 @@ import java.security.KeyStore;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.KeyManagerFactory;
@@ -41,7 +46,9 @@ import javax.xml.parsers.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 import servicesNFE.*;
@@ -97,7 +104,7 @@ public class nfecontroller {
 	}
 	
     @PostMapping(value = "/cadnfe",consumes = "application/json", produces = "application/json")
-    public void SaveNfe(@RequestBody String nfe ) throws JsonProcessingException, IOException {
+    public void SaveNfe(@RequestBody String nfe ) throws JsonProcessingException, IOException, ParseException {
 
     	final ObjectMapper objectMapper = new ObjectMapper();
     	NfeDTO nfes = objectMapper.readValue(nfe, NfeDTO.class);
@@ -122,6 +129,16 @@ public class nfecontroller {
 		  nf.setValor(nfes.getValor());
 		  nf.setUser(userService.getByCnpj(nfes.getCnpj()));
 		  nf.setCnpjremetente(nfes.getCnpjremetente());
+		  nf.setDataemissao(nfes.getDataemissao());
+
+		  
+		  
+		/*
+		 * SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy"); String
+		 * strDate= formatter.format(nfes.getDataemissao());
+		 */
+
+			
 		  
 		  nfeService.SalvarNfe(nf);
 		 
@@ -135,6 +152,22 @@ public class nfecontroller {
     	return nfeService.GetNfes();
     	
     }
+    
+    @GetMapping(value="nfelist/{cnpj}/{dataini}/{datafim}")
+    public List<Nfe> getNfesUser(@PathVariable  String cnpj,
+    		@PathVariable  String dataini,
+    		@PathVariable  String datafim) throws ParseException  {
+    	
+    	
+    	
+    	
+    	return nfeService.GetNfesDate(cnpj, dataini, datafim);
+
+    	
+    	
+    }
+    
+        
     
     
 }

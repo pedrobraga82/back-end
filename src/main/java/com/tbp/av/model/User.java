@@ -32,6 +32,7 @@ public class User {
     @Column
     String endereco;
     @Column
+	public
     String cnpj;
     @Column
     String ie;

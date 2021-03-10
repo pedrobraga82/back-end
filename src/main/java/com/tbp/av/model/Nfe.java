@@ -1,7 +1,10 @@
 package com.tbp.av.model;
 
+import java.util.Date;
+
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -35,30 +38,21 @@ public class Nfe {
 	  @Column
 	  String cnpjremetente;
 	  
-	  @Column
-	  String datarecto;
+	  @Temporal(TemporalType.DATE)
 
 	  @Column
-	  String dataemissao;
+	  Date dataemissao;
 	  
 	  
 	  
 	  
 	  
-	  public String getDataemissao() {
+	  public Date getDataemissao() {
 		return dataemissao;
 	}
 
-	public void setDataemissao(String dataemissao) {
+	public void setDataemissao(Date dataemissao) {
 		this.dataemissao = dataemissao;
-	}
-
-	public String getDatarecto() {
-		return datarecto;
-	}
-
-	public void setDatarecto(String datarecto) {
-		this.datarecto = datarecto;
 	}
 
 	public String getCnpjremetente() {
