@@ -46,31 +46,30 @@ public class UserService {
 	    	
 	    }
 	    
-	    public User UpdateUser(User user, Integer id) {
-	    	
+	    public User UpdateUsuario(User user, Integer id) {
 	    	
 	    	User usuario = userRepository.findOne(id);
 	    	
-	    	
-	    	if (usuario !=null) {
-		        String salt = stringSupport.generate();
-
-    			usuario.setEmpresa(user.getEmpresa());
-    			usuario.setCnpj(user.getCnpj());
-    			usuario.setEndereco(user.getEndereco());
-    			usuario.setIe(user.getIe());
-    			usuario.setPassword(shaPasswordEncoder.encodePassword(user.getPassword(), salt));
-    			usuario.setCnpj(user.getCnpj());
-    			usuario.setSenhacertificado(user.getSenhacertificado());
-    			
-    			
-	    	}
-	    	else {
-	    		usuario = null;
-	    	}
-	    	
+	        String salt = stringSupport.generate();
+		
+	    		 usuario.setEmpresa(user.getEmpresa());
+//				 shaPasswordEncoder.encodePassword(user.getPassword(),salt); 
+				
+	    		 
+	    		 if(user.getPassword() != "") {
+	    			 usuario.setPassword(shaPasswordEncoder.encodePassword(user.getPassword(),salt));
+	    		 
+	    		 }
+	    		 
+	    		 usuario.setSalt(salt);
+				 usuario.setRole(user.getRole());
+				 usuario.setCnpj(user.getCnpj());
+				 usuario.setIe(user.getIe());
+				 usuario.setEndereco(user.getEndereco());
+				 
+				 usuario.setSenhacertificado(user.getSenhacertificado());
+			 	
 	    	return userRepository.save(usuario);
-	    	
 	    	
 	    }
 	    	

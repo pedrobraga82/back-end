@@ -36,17 +36,13 @@ public class NFEConsulta  {
 	  String cnpj = "";
 	  String path_pk = "";
 	  String xml = "";
-	  
-	  //cnpj = 24326252000173
-
-	  
+	  	  
 	  public NFEConsulta(String cnpj, String path_pk, String pass) {
 		  
 		  this.path_pk = path_pk;
 		  this.pass = pass;
 		  this.cnpj = cnpj;
-		  
-		  
+		    
 	  }
 	  
 	  public List<String> getNotas() {
@@ -71,12 +67,15 @@ public class NFEConsulta  {
 	  catch (Exception e) { // TODO Auto-generated catch block
 	  e.printStackTrace(); } finally {
 	  
-	  //return result;
 	  
 	  }
 	  
 	  List<String> xmlNFE = new ArrayList<String>();
+	  
+	  	
 
+
+	  
 	  String xml4 = xml.split("<loteDistDFeInt>")[1].split("</loteDistDFeInt>")[0];
 	  String[] xml5 = xml4.split("<docZip");
 	  
@@ -110,93 +109,13 @@ public class NFEConsulta  {
 		  
 		  xmlNFE.add(outStr);
 		  
-/*	  String[] xml2 = xml.split("</docZip>");
-	  
-	  List<String> xml4 = new ArrayList<String>();
-	  
-	  for (int x=1 ; x <= xml2.length - 2 ; x++) {
-		  xml4.add(xml2[x].split(">")[1]);
 	  }
-	  
-	  
-	  List<String> xmlNFE = new ArrayList<String>();
-	  
-	  
-	  for (int x= 0; x < xml4.size(); x ++) {
-	  
-			  GZIPInputStream gis = null; 
-			  try { 
-				  	gis = new GZIPInputStream(new
-				  	ByteArrayInputStream(Base64.getDecoder().decode(xml4.get(x)))); 
-			  }
-			  
-			  catch (IOException e) {
-				  
-				  e.printStackTrace(); 
-			   }
-				  
-			  BufferedReader bf = null;
-			  
-			  try { 
-				  bf = new BufferedReader(new InputStreamReader(gis, "UTF-8")); 
-				  }
-			  
-			  catch (UnsupportedEncodingException e) {
-			  
-				  e.printStackTrace(); 
-				  }
-			 
-			  String outStr = ""; String line;
-		  
-			  try { 
-				  while ((line=bf.readLine())!=null) { 
-					  outStr += line; } 
-				  } 
-			  	catch (IOException e) {
-			  		e.printStackTrace();
-			  }*/
-			  		
-			  
-			/*
-			 * try { JSONObject json = XML.toJSONObject(xml); String jsonString =
-			 * json.toString(); System.out.println(xml4);
-			 * 
-			 * 
-			 * 
-			 * }catch (JSONException e) { // TODO: handle exception
-			 * System.out.println(e.toString());
-			 * 
-			 * }
-			 */
-	  	
-			  
-			  	//String xml4 = xml.split("<loteDistDFeInt>")[1].split("</loteDistDFeInt>")[0];
-			  //String[] xml5 = xml4.split("<docZip");
-			  //A partir do indice 1
-			  //xml5[1].split(">")[1].split("</docZip>")[0]
-			  
-			  //	JSONObject nfeJson = XML.toJSONObject(outStr);
-		
-			 /// 	System.out.println(outStr);
-			//  	System.out.println("------------------");
-			  	
-			  	
-			//	xmlNFE.add(nfeJson.toString());
-	  
-	  		
-	  
-	  }
-	 		 
-	  System.out.println(xmlNFE.toString());
-	  
+	 		
 	  return xmlNFE;
 	  	
 	  	
 	  }
 
-    
-    
-    
     
 
 }

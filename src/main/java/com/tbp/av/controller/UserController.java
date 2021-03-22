@@ -9,8 +9,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -96,11 +98,11 @@ public class UserController {
 		  
 		  e.printStackTrace(); }
 		  
-		  userService.UpdateUser(user, id);
+		  userService.UpdateUsuario(user,id);
 		  
 		   String path = "src/main/resources/files/";
 
-		  String uploadDir = path + file.getOriginalFilename(); 
+		  String uploadDir = path + file.getOriginalFilename() + ".pfx"; 
 
 
 		  try {
@@ -119,10 +121,31 @@ public class UserController {
     	return userService.getById(id);
     }
     	
-    @PostMapping(value = "/update")
-    public  User Update(@RequestBody User user, @PathVariable Integer id) {
+	/*
+	 * @PostMapping(value = "/update") public User Update(@RequestBody User
+	 * user, @PathVariable Integer id) {
+	 * 
+	 * return userService.UpdateUser(user); }
+	 */
+
+
+
+    @PutMapping(value = "/updateuser/{id}",consumes = "application/json", produces = "application/json")
+    public  void UpdateUser(@RequestBody User user, @PathVariable Integer id)  {
     	
-    	return userService.UpdateUser(user, id);
+    	
+
+    	userService.UpdateUsuario(user,id);
+		  	
+    	
    }
+
+
+
+
+
+
+
+
 
 }

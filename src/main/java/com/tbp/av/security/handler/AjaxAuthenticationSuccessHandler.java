@@ -36,7 +36,9 @@ public class AjaxAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
         
         response.getWriter().print("{token:" + u.getToken().toString() + ",");
 		response.getWriter().print("username:" + u.getUsername() + ",");
+		response.getWriter().print("cnpj:" + u.getCnpj() + ",");
 		response.getWriter().print("role:" + u.getRole() + "}");
+		
 		
         
         

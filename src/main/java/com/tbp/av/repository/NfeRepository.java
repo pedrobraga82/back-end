@@ -43,11 +43,19 @@ public interface  NfeRepository extends CrudRepository<Nfe, Integer> {
 }
 
 
-/*
- * @Query(value = "select distinct  " + "nfe.chnfe," + " nfe.cnpjremetente," +
- * " nfe.dataemissao," + " nfe.ie," + " nfe.nome," + " nfe.tiponf," +
- * " nfe.valor," + " nfe.cnpj," + " user.id" +
- * " from nfe join user on  nfe.cnpj = user.id " + " where " +
- * "nfe.dataemissao >= :dataini" + " and nfe.dataemissao <= :datafim" +
- * " and user.cnpj = :cnpj ", nativeQuery = true)
- */
+//@Query(value = "select   "
+//		+ "nfe.chnfe,"
+//		+ "nfe.id, "
+//		+ " nfe.cnpjremetente,"
+//		+ " nfe.dataemissao,"
+//		+ " nfe.ie,"
+//		+ " nfe.nome,"
+//		+ " nfe.tiponf,"
+//		+  " nfe.valor,"
+//		+ " nfe.cnpj"
+//		+ " from nfe  "
+//		+ " where "
+//		+ "nfe.dataemissao >= :dataini"
+//		+ " and nfe.dataemissao <= :datafim"
+//		+ " and nfe.cnpj = :cnpj"
+//		, nativeQuery = true)
