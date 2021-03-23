@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/nfeapp-1.0-SNAPSHOT.jar -Dserver.port=$PORT $JAR_OPTS
+web: java $JAVA_OPTS  -Dserver.port=443 $JAR_OPTS -jar target/nfeapp-1.0-SNAPSHOT.jar
