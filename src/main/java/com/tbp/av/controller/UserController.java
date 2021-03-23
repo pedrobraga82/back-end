@@ -49,6 +49,14 @@ public class UserController {
     
     @Autowired
     private StorageService storageService;
+
+    @GetMapping(value="/ok")
+    public String GetOK() {
+    		return "OK";	
+    }
+    
+    
+    
     
     @GetMapping(value="userslist")
     public List<User> GetUsers() {
