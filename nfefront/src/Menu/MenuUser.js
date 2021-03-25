@@ -1,0 +1,140 @@
+import Header from '../Components/Header';
+import React,{useEffect,useState} from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import AccountTreeIcon from '@material-ui/icons/AccountTree';
+import FindInPageIcon from '@material-ui/icons/FindInPage';
+import { SettingsRemoteOutlined } from '@material-ui/icons';
+import {Link} from 'react-router-dom'; 
+
+
+const useStyles = makeStyles({
+  root: {
+    minWidth: 50,
+    margin: '2 10px',
+
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '2 2px',
+    transform: 'scale(0.8)',
+    alignContent: 'center'
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+  center: {
+
+    width: '50%',
+    border: '3px solid green',
+    padding: '10px',
+  },
+});
+
+export default function MenuUser() {
+  const classes = useStyles();
+  const bull = <span className={classes.bullet}>•</span>;
+
+  const [usuario,SetUsuario] = useState("");
+  const [token,SetToken] = useState("");
+  const [role,SetRole] = useState("");
+      
+
+  useEffect(() => {
+      
+       let usuario = localStorage.getItem("username");
+       let token = localStorage.getItem("token");
+       let role = localStorage.getItem("role");
+    
+        SetToken(token);
+        SetUsuario(usuario);
+        SetRole(role);
+
+      return () => {
+          //cleanup
+      }
+  }, [])  
+
+  if (token != "" || token == null || ! token ||
+        usuario != "" ||
+        role !="") {
+
+    return (
+        <div>
+            <div>
+                <Header /> 
+            </div>
+            <br></br>
+            <br></br>
+            
+            <div>
+                <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+                >
+                        <Link to={{
+                        pathname: "/nfelist"}}
+                    >
+                        <Card>
+                        <CardContent>
+                            <Typography className={classes.title} color="textSecondary" gutterBottom>
+                            Visualização de notas
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                            <AccountTreeIcon fontSize='large'/>
+                        </CardActions>
+                        </Card>
+                    </Link>          
+                </Grid>
+                <br></br>
+                <br></br>
+
+                <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    >
+                        <Link to={{
+                        pathname: "/nfeview"}}
+                    >
+
+
+                        <Card className={classes.root} variant="outlined">
+                        <CardContent>
+                            <Typography className={classes.title} color="textSecondary" gutterBottom>
+                            Consulta de notas na receita
+                            </Typography>
+                
+                        </CardContent>
+                        <CardActions>
+                            <FindInPageIcon fontSize='large' /> 
+                        </CardActions>
+                        </Card>
+                  </Link>    
+                </Grid>
+        
+                </div>
+        </div>    
+    );
+        }
+   else {
+       return (
+       <div>
+           <h1>ACESSO NÃO AUTORIZADO</h1>
+       </div>
+       );
+   }     
+}
