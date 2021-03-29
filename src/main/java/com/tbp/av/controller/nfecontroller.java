@@ -77,8 +77,10 @@ public class nfecontroller {
 		
 		
 	String pass = userService.getByCnpj(cnpj).getSenhacertificado();
-	String path_pk = "src/main/resources/files/"+ cnpj + ".pfx"; // +"/" + cnpj + ".pfx";
+	String path_pk = "/src/main/resources/files/"+ cnpj + ".pfx"; // +"/" + cnpj + ".pfx";
 				
+		
+	
 		NFEConsulta nfeConsulta = new NFEConsulta(cnpj, path_pk, pass);
 		
 		return nfeConsulta.getNotas();

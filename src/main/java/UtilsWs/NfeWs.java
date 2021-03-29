@@ -23,7 +23,7 @@ public class NfeWs {
 	
 	public String getNotas(String url_ws, String path_pk, String pass, String soap_message) throws Exception{
 
-
+		
 	    // Aqui vc carrega sua chave privada
 	    KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
 	    FileInputStream fis = new FileInputStream(new File(path_pk));
