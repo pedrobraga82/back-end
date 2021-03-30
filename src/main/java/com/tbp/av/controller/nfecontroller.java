@@ -73,11 +73,13 @@ public class nfecontroller {
 	@CrossOrigin(allowedHeaders = "*",  origins = "*")
 	@GetMapping("/nfe/{cnpj}")
 	List<String> one(@PathVariable String cnpj) {
-		
-		
-		
+			
 	String pass = userService.getByCnpj(cnpj).getSenhacertificado();
-	String path_pk = "/src/main/resources/files/"+ cnpj + ".pfx"; // +"/" + cnpj + ".pfx";
+		
+		  String path = new File(".").getCanonicalPath() + "/src/main/resources/files/"; 
+	
+		
+	String path_pk =    path +  cnpj + ".pfx"; // +"/" + cnpj + ".pfx";
 				
 		NFEConsulta nfeConsulta = new NFEConsulta(cnpj, path_pk, pass);
 		
