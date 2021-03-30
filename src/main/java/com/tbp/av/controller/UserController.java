@@ -32,6 +32,7 @@ import aj.org.objectweb.asm.TypeReference;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -98,7 +99,7 @@ public class UserController {
     
     
     @PostMapping(value = "/caduser/file/{id}",  consumes = {"multipart/mixed", "multipart/form-data"})
-    public  void SaveFile(@RequestParam("file") MultipartFile file,@RequestParam("id") Integer id)  {
+    public  void SaveFile(@RequestParam("file") MultipartFile file,@RequestParam("id") Integer id) throws IOException  {
 
 		  User user = userService.getById(id);
 		  
@@ -108,7 +109,9 @@ public class UserController {
 		  
 		  userService.UpdateUsuario(user,id);
 		  
-		   String path = "/src/main/resources/files/";
+		  String path = new File(".").getCanonicalPath() + "/src/main/resources/files/"; 
+		  
+		  // String path = "/src/main/resources/files/";
 
 		  String uploadDir = path + file.getOriginalFilename() + ".pfx"; 
 
