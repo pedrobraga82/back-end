@@ -108,7 +108,8 @@ public class UserController {
 		  
 		  userService.UpdateUsuario(user,id);
 		  
-		   String path = "/src/main/resources/files/";
+		 //  String path = "/src/main/resources/files/";
+		  String path = new File(".").getCanonicalPath() + "/src/main/resources/files/"; 
 
 		  String uploadDir = path + file.getOriginalFilename() + ".pfx"; 
 
