@@ -101,13 +101,8 @@ public class UserController {
     @PostMapping(value = "/caduser/file/{id}",  consumes = {"multipart/mixed", "multipart/form-data"})
     public  void SaveFile(@RequestParam("file") MultipartFile file,@RequestParam("id") Integer id) throws IOException   {
 
-		  User user = userService.getById(id);
-		  
-		  try { user.setArquivo(file.getBytes()); } catch (IOException e) {
-		  
-		  e.printStackTrace(); }
-		  
-		  userService.UpdateUsuario(user,id);
+	
+	
 		  
 			  String path = new File(".").getCanonicalPath() + "/src/main/resources/files/"; 
 		  
