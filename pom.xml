@@ -100,7 +100,11 @@
               <goal>copy-dependencies</goal>
             </goals>
             <configuration>
-              <!-- configure the plugin here -->
+                <archive>  
+                    <manifest>  
+                        <mainClass>com.tbp.av.Application</mainClass>  
+                    </manifest>  
+                </archive>  
             </configuration>
           </execution>
         </executions>
