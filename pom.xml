@@ -86,24 +86,27 @@
     </dependency>
     </dependencies>
 
-<build>  
-    <plugins>  
-        <plugin>  
-            <!-- Build an executable JAR -->  
-            <groupId>org.apache.maven.plugins</groupId>  
-            <artifactId>maven-jar-plugin</artifactId>  
-            <version>3.1.0</version>  
-            <configuration>  
-                <archive>  
-                    <manifest>  
-                        <mainClass>com.tbp.av.Application</mainClass>  
-                    </manifest>  
-                </archive>  
-            </configuration>  
-        </plugin>  
+	  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.1.2</version>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <!-- configure the plugin here -->
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
-</build>	
-	
+  </build>
 	
     <properties>
         <java.version>1.8</java.version>
